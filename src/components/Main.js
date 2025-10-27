@@ -41,7 +41,14 @@ const Main = () => {
   };
 
   useEffect(() => {
+    let retryCount = 0;
+    const maxRetries = 10;
+    
     const fetchInitialTimes = () => {
+      if (retryCount >= maxRetries) {
+        console.error("Failed to load API after maximum retries");
+        return;
+      }
       // Check if the API function is available on the window object
       let timesToSet = []; // Initialize timesToSet
       if (window.fetchAPI) { // Use the actual API if available
@@ -61,6 +68,7 @@ const Main = () => {
         // If the API is not ready, wait and try again.
         // This handles the race condition where the component mounts before the script loads.
         console.log("window.fetchAPI not yet available, retrying...");
+        retryCount++;
         setTimeout(fetchInitialTimes, 100);
       }
     };

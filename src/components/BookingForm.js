@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 
 // Helper function to format date to YYYY-MM-DD
 const getTodayString = () => {
@@ -12,6 +12,12 @@ const BookingForm = ({ availableTimes, dispatch, submitForm }) => {
   const [time, setTime] = useState('');
   const [guests, setGuests] = useState(1);
   const [occasion, setOccasion] = useState('Birthday');
+  const [isFormValid, setIsFormValid] = useState(false);
+
+  const validateForm = useCallback(() => {
+    // Simple validation: check if date is selected and guests are within range
+    return date !== '' && guests >= 1 && guests <= 10 && time !== '';
+  }, [date, time, guests]);
 
   useEffect(() => {
     // When availableTimes prop changes, update the local time state
@@ -21,6 +27,11 @@ const BookingForm = ({ availableTimes, dispatch, submitForm }) => {
     }
   }, [availableTimes]);
 
+  useEffect(() => {
+    // Validate form whenever relevant fields change
+    setIsFormValid(validateForm());
+  }, [date, time, guests, validateForm]);
+
   const handleDateChange = (e) => {
     const newDate = e.target.value;
     setDate(newDate);
@@ -28,10 +39,19 @@ const BookingForm = ({ availableTimes, dispatch, submitForm }) => {
     let timesToSet = [];
     if (window.fetchAPI) { // Use the actual API if available
       const times = window.fetchAPI(new Date(newDate));
-      console.log(`API response for date change (${new Date(newDate).toDateString()}):`, times); // Log the raw API response
+      console.log(`API response for date change (${new Date(newDate).toDateString()}):`, times);
 
-      // Directly use the times returned by the API
-      timesToSet = times;
+      if (times && times.length > 0) {
+        timesToSet = times;
+      } else {
+        // Fallback if API returns empty or no times for selected date
+        console.warn("API returned no times for selected date, using default times.");
+        timesToSet = ['17:00', '18:00', '19:00', '20:00', '21:00', '22:00'];
+      }
+      dispatch({ type: 'UPDATE_TIMES', payload: timesToSet });
+    } else { // If window.fetchAPI is not available even on date change, use default
+      console.warn("window.fetchAPI not available on date change, using default times.");
+      timesToSet = ['17:00', '18:00', '19:00', '20:00', '21:00', '22:00'];
       dispatch({ type: 'UPDATE_TIMES', payload: timesToSet });
     }
   };
@@ -42,12 +62,29 @@ const BookingForm = ({ availableTimes, dispatch, submitForm }) => {
     submitForm(formData);
   };
 
+  const fieldStyles = {
+    padding: '10px',
+    borderRadius: '8px',
+    border: '1px solid #ccc',
+    fontSize: '1rem',
+    textAlign: 'center',
+  };
+
+  const submitButtonStyles = {
+    ...fieldStyles,
+    backgroundColor: isFormValid ? '#F4CE14' : '#cccccc',
+    color: isFormValid ? 'black' : '#666666',
+    fontWeight: 'bold',
+    cursor: isFormValid ? 'pointer' : 'not-allowed',
+    border: 'none',
+  };
+
   return (
-    <form style={{ display: 'grid', maxWidth: '200px', gap: '20px' }} onSubmit={handleSubmit}>
+    <form style={{ display: 'grid', maxWidth: '200px', gap: '20px', margin: '0 auto' }} onSubmit={handleSubmit}>
       <label htmlFor="res-date">Choose date</label>
-      <input type="date" id="res-date" value={date} onChange={handleDateChange} required/>
+      <input type="date" id="res-date" value={date} onChange={handleDateChange} required min={getTodayString()} style={fieldStyles} />
       <label htmlFor="res-time">Choose time</label>
-      <select id="res-time" value={time} onChange={(e) => setTime(e.target.value)} required>
+      <select id="res-time" value={time} onChange={(e) => setTime(e.target.value)} required style={fieldStyles}>
         {/* availableTimes is now received as a prop */}
         {availableTimes && availableTimes.map((availableTime) => (
           <option key={availableTime} value={availableTime}>
@@ -57,21 +94,22 @@ const BookingForm = ({ availableTimes, dispatch, submitForm }) => {
       </select>
       <label htmlFor="guests">Number of guests</label>
       <input
- type="number"
- placeholder="1"
- min="1"
- max="10"
- id="guests"
- value={guests}
- onChange={(e) => setGuests(e.target.value)}
- required
- />
+        type="number"
+        placeholder="1"
+        min="1"
+        max="10"
+        id="guests"
+        value={guests}
+        onChange={(e) => setGuests(parseInt(e.target.value, 10))}
+        required
+        style={fieldStyles}
+      />
       <label htmlFor="occasion">Occasion</label>
-      <select id="occasion" value={occasion} onChange={(e) => setOccasion(e.target.value)} required>
+      <select id="occasion" value={occasion} onChange={(e) => setOccasion(e.target.value)} required style={fieldStyles}>
         <option>Birthday</option>
         <option>Anniversary</option>
       </select>
-      <input type="submit" value="Make Your reservation" aria-label="On Click" />
+      <input type="submit" value="Make Your reservation" aria-label="On Click" disabled={!isFormValid} style={submitButtonStyles} />
     </form>
   );
 };

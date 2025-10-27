@@ -19,7 +19,7 @@ const BookingsList = ({ bookings }) => {
         {bookings.map((booking, index) => (
           <tr key={index}>
             <td style={{ border: '1px solid black', padding: '8px' }}>{booking.date}</td>
-            <td style={{ border: '1-px solid black', padding: '8px' }}>{booking.time}</td>
+            <td style={{ border: '1px solid black', padding: '8px' }}>{booking.time}</td>
             <td style={{ border: '1px solid black', padding: '8px' }}>{booking.guests}</td>
             <td style={{ border: '1px solid black', padding: '8px' }}>{booking.occasion}</td>
           </tr>
