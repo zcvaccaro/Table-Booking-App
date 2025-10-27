@@ -142,6 +142,8 @@
   background-color: #EDEFEE;
   border-radius: 8px;
   overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0.1, 0.1, 0.1);
+  transition: transform 0.2s, box-shadow 0.2s;
 }
 
 .card-image {
@@ -229,17 +231,18 @@
   object-fit: cover;
   border-radius: 16px;
   position: absolute;
+  border: 4px solid #495E57;
   box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 
 .about-image-1 {
-  top: 0;
+  top: -20px;
   left: 0;
   z-index: 1;
 }
 
 .about-image-2 {
-  bottom: 0;
+  bottom: -20px;
   right: 20px;
 }
 

@@ -11,8 +11,8 @@ const Chicago = () => {
         <p>Little Lemon is a charming neighborhood bistro that serves simple food and classic cocktails in a lively but casual environment. The restaurant features a locally-sourced menu with daily specials.</p>
       </div>
       <div className="about-images">
-        <img src={restaurant} alt="Little Lemon Restaurant" className="about-image-1" />
-        <img src={chef} alt="Little Lemon Chef" className="about-image-2" />
+        <img src={chef} alt="Little Lemon Chef" className="about-image-1" />
+        <img src={restaurant} alt="Little Lemon Restaurant" className="about-image-2" />
       </div>
     </section>
   );
