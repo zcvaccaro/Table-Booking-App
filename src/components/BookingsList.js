@@ -6,22 +6,22 @@ const BookingsList = ({ bookings }) => {
   }
 
   return (
-    <table style={{ width: '100%', marginTop: '20px', borderCollapse: 'collapse' }}>
+    <table className="bookings-table">
       <thead>
         <tr>
-          <th style={{ border: '1px solid black', padding: '8px' }}>Date</th>
-          <th style={{ border: '1px solid black', padding: '8px' }}>Time</th>
-          <th style={{ border: '1px solid black', padding: '8px' }}>Guests</th>
-          <th style={{ border: '1px solid black', padding: '8px' }}>Occasion</th>
+          <th>Date</th>
+          <th>Time</th>
+          <th>Guests</th>
+          <th>Occasion</th>
         </tr>
       </thead>
       <tbody>
         {bookings.map((booking, index) => (
           <tr key={index}>
-            <td style={{ border: '1px solid black', padding: '8px' }}>{booking.date}</td>
-            <td style={{ border: '1px solid black', padding: '8px' }}>{booking.time}</td>
-            <td style={{ border: '1px solid black', padding: '8px' }}>{booking.guests}</td>
-            <td style={{ border: '1px solid black', padding: '8px' }}>{booking.occasion}</td>
+            <td>{booking.date}</td>
+            <td>{booking.time}</td>
+            <td>{booking.guests}</td>
+            <td>{booking.occasion}</td>
           </tr>
         ))}
       </tbody>

@@ -62,29 +62,12 @@ const BookingForm = ({ availableTimes, dispatch, submitForm }) => {
     submitForm(formData);
   };
 
-  const fieldStyles = {
-    padding: '10px',
-    borderRadius: '8px',
-    border: '1px solid #ccc',
-    fontSize: '1rem',
-    textAlign: 'center',
-  };
-
-  const submitButtonStyles = {
-    ...fieldStyles,
-    backgroundColor: isFormValid ? '#F4CE14' : '#cccccc',
-    color: isFormValid ? 'black' : '#666666',
-    fontWeight: 'bold',
-    cursor: isFormValid ? 'pointer' : 'not-allowed',
-    border: 'none',
-  };
-
   return (
-    <form style={{ display: 'grid', maxWidth: '200px', gap: '20px', margin: '0 auto' }} onSubmit={handleSubmit}>
+    <form className="booking-form" onSubmit={handleSubmit}>
       <label htmlFor="res-date">Choose date</label>
-      <input type="date" id="res-date" value={date} onChange={handleDateChange} required min={getTodayString()} style={fieldStyles} />
+      <input type="date" id="res-date" value={date} onChange={handleDateChange} required min={getTodayString()} className="field" />
       <label htmlFor="res-time">Choose time</label>
-      <select id="res-time" value={time} onChange={(e) => setTime(e.target.value)} required style={fieldStyles}>
+      <select id="res-time" value={time} onChange={(e) => setTime(e.target.value)} required className="field">
         {/* availableTimes is now received as a prop */}
         {availableTimes && availableTimes.map((availableTime) => (
           <option key={availableTime} value={availableTime}>
@@ -102,14 +85,20 @@ const BookingForm = ({ availableTimes, dispatch, submitForm }) => {
         value={guests}
         onChange={(e) => setGuests(parseInt(e.target.value, 10))}
         required
-        style={fieldStyles}
+        className="field"
       />
       <label htmlFor="occasion">Occasion</label>
-      <select id="occasion" value={occasion} onChange={(e) => setOccasion(e.target.value)} required style={fieldStyles}>
+      <select id="occasion" value={occasion} onChange={(e) => setOccasion(e.target.value)} required className="field">
         <option>Birthday</option>
         <option>Anniversary</option>
       </select>
-      <input type="submit" value="Make Your reservation" aria-label="On Click" disabled={!isFormValid} style={submitButtonStyles} />
+      <input
+        type="submit"
+        value="Make Your reservation"
+        aria-label="On Click"
+        disabled={!isFormValid}
+        className="submit-button"
+      />
     </form>
   );
 };
