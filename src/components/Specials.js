@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import greeksalad from '../assets/greek salad.jpg';
 import bruschetta from '../assets/brush.svg';
 import lemondessert from '../assets/lemon dessert.jpg';
@@ -26,7 +27,7 @@ const Specials = () => {
                 <p className="price">{item.price}</p>
               </div>
               <p>{item.description}</p>
-              <a href="/order-online" className="order-link">Order a delivery</a>
+              <Link to="/" className="order-link">Order a delivery</Link>
             </div>
           </div>
         ))}
