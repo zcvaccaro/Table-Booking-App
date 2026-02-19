@@ -84,7 +84,11 @@ const Main = () => {
         <Route path="/" element={<HomePage />} />
         <Route path="/booking" element={<BookingPage availableTimes={state.availableTimes} bookings={state.bookings} dispatch={dispatch} submitForm={submitForm} />} />
         <Route path="/confirmed-booking" element={<ConfirmedBooking />} />
-        {/* Add other routes here for About, Menu, etc. */}
+        {/* Placeholder routes for nav links */}
+        <Route path="/about" element={<h1 style={{textAlign: 'center', padding: '2rem'}}>About Us - Page Under Construction</h1>} />
+        <Route path="/menu" element={<h1 style={{textAlign: 'center', padding: '2rem'}}>Menu - Page Under Construction</h1>} />
+        <Route path="/order-online" element={<h1 style={{textAlign: 'center', padding: '2rem'}}>Order Online - Page Under Construction</h1>} />
+        <Route path="/login" element={<h1 style={{textAlign: 'center', padding: '2rem'}}>Login - Page Under Construction</h1>} />
       </Routes>
     </main>
   );
