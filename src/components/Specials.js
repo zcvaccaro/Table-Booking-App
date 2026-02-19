@@ -15,7 +15,7 @@ const Specials = () => {
     <section className="specials">
       <div className="specials-header">
         <h2>This week's specials!</h2>
-        <button className="btn-primary">Online Menu</button>
+        <Link to="/" className="btn-primary">Online Menu</Link>
       </div>
       <div className="specials-cards">
         {specialsData.map(item => (

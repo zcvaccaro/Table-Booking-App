@@ -33,7 +33,8 @@ const Main = () => {
 
   const submitForm = (formData) => {
     // The submitAPI function is made available globally by the script added to index.html
-    if (window.submitAPI(formData)) {
+    const submit = window.submitAPI || ((formData) => true);
+    if (submit(formData)) {
       // On successful submission, add the booking to our state
       dispatch({ type: 'ADD_BOOKING', payload: formData });
       navigate('/confirmed-booking');
@@ -43,10 +44,12 @@ const Main = () => {
   useEffect(() => {
     let retryCount = 0;
     const maxRetries = 10;
-    
+
     const fetchInitialTimes = () => {
       if (retryCount >= maxRetries) {
         console.error("Failed to load API after maximum retries");
+        // Fallback to default times if API fails to load
+        dispatch({ type: 'UPDATE_TIMES', payload: ['17:00', '18:00', '19:00', '20:00', '21:00', '22:00'] });
         return;
       }
       // Check if the API function is available on the window object
