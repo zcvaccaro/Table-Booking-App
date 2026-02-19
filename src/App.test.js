@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import { BrowserRouter } from 'react-router-dom';
+import { HashRouter } from 'react-router-dom';
 import App from './App';
 
 beforeAll(() => {
@@ -10,9 +10,9 @@ beforeAll(() => {
 
 test('Renders the main application and finds a heading', () => {
   render(
-    <BrowserRouter>
+    <HashRouter>
       <App />
-    </BrowserRouter>
+    </HashRouter>
   );
   // Find all heading elements with the name "Little Lemon".
   // This is more robust and accessibility-focused than searching for text.
