@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/Table-Booking-App/static/css/main.d87c97a4.css",
-    "main.js": "/Table-Booking-App/static/js/main.6c57bd57.js",
+    "main.js": "/Table-Booking-App/static/js/main.1ee0ff1b.js",
     "static/media/brush.svg": "/Table-Booking-App/static/media/brush.29ea078fea3d3120ed22402e901b5bbc.svg",
     "static/media/restaurant chef B.jpg": "/Table-Booking-App/static/media/restaurant chef B.4b4c2d26b514db32e8fc.jpg",
     "static/media/greek salad.jpg": "/Table-Booking-App/static/media/greek salad.bed423a1fab5b210e347.jpg",
@@ -10,10 +10,10 @@
     "static/media/BannerLogo.jpg": "/Table-Booking-App/static/media/BannerLogo.e68246686f716ff6e5d8.jpg",
     "index.html": "/Table-Booking-App/index.html",
     "main.d87c97a4.css.map": "/Table-Booking-App/static/css/main.d87c97a4.css.map",
-    "main.6c57bd57.js.map": "/Table-Booking-App/static/js/main.6c57bd57.js.map"
+    "main.1ee0ff1b.js.map": "/Table-Booking-App/static/js/main.1ee0ff1b.js.map"
   },
   "entrypoints": [
     "static/css/main.d87c97a4.css",
-    "static/js/main.6c57bd57.js"
+    "static/js/main.1ee0ff1b.js"
   ]
 }
